@@ -1,0 +1,30 @@
+{
+  "name": "favs-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfredoporto/favs-api-js.git"
+  },
+  "author": "alfredoporto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfredoporto/favs-api-js/issues"
+  },
+  "homepage": "https://github.com/alfredoporto/favs-api-js#readme",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.21",
+    "mongoose-autopopulate": "^0.12.2"
+  }
+}
