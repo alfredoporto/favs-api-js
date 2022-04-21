@@ -31,6 +31,6 @@ module.exports = {
         );
         if (!isCorrectPassword) return res.send('Password incorrect');
         const token = jwt.sign(JSON.stringify(userFound), jwtSecret);
-        res.json({ message: `${userFound.email} welcome`, token });
+        res.json({ message: `${userFound.email} welcome`, token, userFound });
     },
 };
