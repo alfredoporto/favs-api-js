@@ -1,11 +1,7 @@
 
 const jwt = require('jsonwebtoken');
-const {
-    mongo: { usersModel },
-} = require('../../persistance');
-const {
-    bcryptHelpers: { encryptPassword, comparePassword },
-} = require('../../helpers');
+const { mongo: { usersModel } } = require('../../persistance');
+const { bcryptHelpers: { encryptPassword, comparePassword } } = require('../../helpers');
 const { jwtSecret } = require('../../config');
 
 module.exports = {
@@ -21,6 +17,7 @@ module.exports = {
             res.send(error.message);
         }
     },
+
     signIn: async (req, res) => {
         const { email, password } = req.body;
         const userFound = await usersModel.findOne({ email });

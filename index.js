@@ -1,10 +1,8 @@
 require('dotenv').config();
 
-const {
-    environmentUtils: { validateRequiredEnvs },
-} = require('./utils');
-
+const { environmentUtils: { validateRequiredEnvs } } = require('./utils');
 const requiredEnvs = ['PORT', 'MONGO_URI'];
+
 validateRequiredEnvs(requiredEnvs);
 
 const { mongoDBHelpers } = require('./helpers');

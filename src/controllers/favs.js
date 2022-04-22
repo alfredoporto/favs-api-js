@@ -1,6 +1,4 @@
-const {
-    mongo: { favsModel },
-} = require('../../persistance');
+const { mongo: { favsModel } } = require('../../persistance');
 
 module.exports = {
     /*
