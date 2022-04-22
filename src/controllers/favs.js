@@ -3,7 +3,9 @@ const {
 } = require('../../persistance');
 
 module.exports = {
-    //funciona
+    /*
+        retrieve all favs lists given a user
+    */
     getAll: async (req, res) => {
         const owner = req.query.user;
         console.log(owner);
@@ -14,7 +16,9 @@ module.exports = {
         res.send(favs);
     },
 
-    //funciona
+    /*
+        retrieve a specific favs list of a user
+    */
     getOne: async (req, res) => {
         const owner = req.query.user;
         console.log("user id: " + owner);
@@ -27,18 +31,25 @@ module.exports = {
 
         res.send(favs);
     },
-    //arreglar
+
+    /*
+        delete one fav element of a fav list of a user
+    */
     deleteOne: async (req, res) => {
-        const { _ownerId } = req.query.user;
-        const { _favId } = req.params.id;
-        const deletedFav = await favsModel.updateOne(
+        const { user: _ownerId } = req.query;
+        const { id: _favId } = req.params;
+        console.log(_ownerId, _favId);
+        const deletedFav = await favsModel.findByIdAndUpdate(
             _ownerId,
-            { $pull: { favs: { _id: _favId } } }
+            { $pull: { favs: { _id: _favId } } },
+            { new: true }
         );
         res.send(`${deletedFav} deleted`);
     },
 
-    //funciona
+    /*
+        create a list of favs for a user
+    */
     createOne: async (req, res) => {
         const { owner, name, favs } = req.body;
         const newFav = new favsModel({ owner, name, favs });
@@ -46,18 +57,21 @@ module.exports = {
         res.send(`${newFav.name} saved`);
     },
 
-    //falta arreglar
+    /*
+        add a fav to the array of favs of a specific list of a user
+    */
     addFav: async (req, res) => {
-        const { _id } = req.query;
+        const { id } = req.params;
+        console.log("favs id: " + id);
         const { fav } = req.body;
+        console.log("fav to be pushed: " + JSON.stringify(fav));
 
-        const favsUpdated = await favsModel.findByIdAndUpdate(
-            _id,
-            {
-                $push: { favs: fav },
-            },
-            { useFindAndModify: false }
-        );
+        const favsUpdated = await favsModel
+            .findByIdAndUpdate(
+                id,
+                { $push: { favs: fav } },
+                { useFindAndModify: false }
+            );
         res.send(`${favsUpdated.name} updated`);
     }
 };
